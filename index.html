@@ -1,962 +1,965 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Information Security Awareness Training | IP ServerOne</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-  :root {
-    --accent-yellow: #FBC016;
-    --light-bg: #F5F6F6;
-    --dark-charcoal: #0D0E0E;
-    --card-bg: #FFFFFF;
-    --border-color: #E2E8F0;
-    --text-muted: #52525B;
-    --danger-red: #EF4444;
-    --success-green: #10B981;
-    --radius-lg: 20px;
-    --radius-md: 14px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--light-bg);
-    color: var(--dark-charcoal);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
-    background-size: 28px 28px;
-  }
-
-  /* ===== KEYFRAME ANIMATIONS ===== */
-  @keyframes floatSlow {
-    0% { transform: translateY(0px) rotate(0deg) scale(1); }
-    33% { transform: translateY(-12px) rotate(-3deg) scale(1.02); }
-    66% { transform: translateY(-6px) rotate(3deg) scale(0.99); }
-    100% { transform: translateY(0px) rotate(0deg) scale(1); }
-  }
-
-  @keyframes spinGear {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes pulseBadge {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.08); opacity: 0.9; }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes typeText {
-    0%, 10% { width: 0; }
-    50%, 80% { width: 9ch; }
-    90%, 100% { width: 0; }
-  }
-
-  @keyframes blinkBorder {
-    50% { border-color: transparent; }
-  }
-
-  @keyframes slideUpSteps {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes scanLine {
-    0% { transform: translateY(0px); opacity: 0.2; }
-    50% { opacity: 0.8; }
-    100% { transform: translateY(70px); opacity: 0.2; }
-  }
-
-  @keyframes pulseRing {
-    0% { r: 25px; opacity: 1; }
-    100% { r: 50px; opacity: 0; }
-  }
-
-  @keyframes dataSlide {
-    0% { transform: translateX(-40px); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateX(50px); opacity: 0; }
-  }
-
-  @keyframes soundWave {
-    0%, 100% { transform: scaleY(0.3); }
-    50% { transform: scaleY(1.1); }
-  }
-
-  @keyframes keyInsert {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(25px); }
-  }
-
-  @keyframes nodePulse {
-    0%, 100% { transform: scale(1); fill: #FBC016; }
-    50% { transform: scale(1.15); fill: #EF4444; }
-  }
-
-  @keyframes waveHand {
-    0%, 100% { transform: rotate(0deg); transform-origin: bottom right; }
-    25% { transform: rotate(14deg); transform-origin: bottom right; }
-    75% { transform: rotate(-8deg); transform-origin: bottom right; }
-  }
-
-  .animated-float { 
-    animation: floatSlow 4.5s ease-in-out infinite; 
-    transform-origin: center center;
-  }
-  
-  .animated-gear { 
-    transform-origin: 310px 95px; 
-    animation: spinGear 14s linear infinite; 
-  }
-
-  .animated-avatar {
-    animation: floatSlow 3.8s ease-in-out infinite;
-  }
-
-  .waving-hand {
-    animation: waveHand 2.2s ease-in-out infinite;
-  }
-
-  .svg-scan-beam { animation: scanLine 2.5s infinite linear; }
-  .svg-pulse-wave { animation: pulseRing 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); transform-origin: center; }
-  .svg-data-packet { animation: dataSlide 1.8s infinite linear; }
-  .svg-wave-bar-1 { animation: soundWave 1.2s infinite ease-in-out 0.1s; transform-origin: bottom; }
-  .svg-wave-bar-2 { animation: soundWave 1.2s infinite ease-in-out 0.3s; transform-origin: bottom; }
-  .svg-wave-bar-3 { animation: soundWave 1.2s infinite ease-in-out 0.5s; transform-origin: bottom; }
-  .svg-wave-bar-4 { animation: soundWave 1.2s infinite ease-in-out 0.2s; transform-origin: bottom; }
-  .svg-key-motion { animation: keyInsert 2.5s infinite ease-in-out; }
-  .svg-node-alert { animation: nodePulse 2s infinite ease-in-out; transform-origin: center; }
-
-  /* ===== HEADER NAVIGATION ===== */
-  .header {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--accent-yellow);
-    padding: 12px 40px;
-    height: 65px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  }
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  .logo-img {
-    height: 35px;
-    max-height: 35px;
-    width: auto;
-    max-width: 200px;
-    display: block;
-    object-fit: contain;
-  }
-
-  .tag {
-    background: var(--accent-yellow);
-    color: var(--dark-charcoal);
-    font-size: 0.8rem;
-    font-weight: 800;
-    padding: 6px 16px;
-    border-radius: 20px;
-    animation: pulseBadge 3s infinite ease-in-out;
-    border: 1px solid var(--dark-charcoal);
-  }
-
-  /* ===== INTERACTIVE THREAT NEWSLETTER TICKER ===== */
-  .threat-ticker {
-    background: var(--dark-charcoal);
-    color: #FFFFFF;
-    padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--accent-yellow);
-    font-size: 0.9rem;
-    font-weight: 600;
-    position: relative;
-    z-index: 99;
-  }
-
-  .ticker-badge {
-    background: var(--danger-red);
-    color: #FFFFFF;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-right: 12px;
-    border: 1px solid #FFFFFF;
-  }
-
-  .ticker-content-container {
-    overflow: hidden;
-    white-space: nowrap;
-    flex-grow: 1;
-    position: relative;
-    height: 24px;
-  }
-
-  .ticker-item {
-    position: absolute;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    display: inline-block;
-  }
-
-  .ticker-item.active {
-    opacity: 1;
-  }
-
-  .ticker-action-btn {
-    background: var(--accent-yellow);
-    color: var(--dark-charcoal);
-    border: none;
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-weight: 800;
-    font-size: 0.8rem;
-    cursor: pointer;
-    margin-left: 15px;
-    transition: transform 0.2s;
-  }
-
-  .ticker-action-btn:hover {
-    transform: scale(1.05);
-  }
-
-  /* ===== HERO SECTION (FIXED LAYOUT & ENHANCED CONTRAST) ===== */
-.hero {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 40px 24px 30px;
-}
-
-.hero-container-box {
-  background: #0D0E0E;
-  color: #FFFFFF;
-  border: 3px solid var(--dark-charcoal);
-  border-radius: var(--radius-lg);
-  padding: 48px 56px;
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 40px;
-  align-items: center;
-  box-shadow: 10px 10px 0px var(--accent-yellow);
-  position: relative;
-  overflow: hidden;
-  /* Fixed min-height prevents vertical layout jumps */
-  min-height: 420px; 
-}
-
-/* Background Graphic Grid */
-.hero-container-box::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    linear-gradient(rgba(251, 192, 22, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(251, 192, 22, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-  pointer-events: none;
-}
-
-/* Command Center Status Pill */
-.hero-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(251, 192, 22, 0.15);
-  border: 1px solid var(--accent-yellow);
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #FDE047; /* Brighter yellow for dark backgrounds */
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.status-pulse-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--accent-yellow);
-  border-radius: 50%;
-  animation: pulseBadge 1.5s infinite;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-text h1 {
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: #FFFFFF;
-  line-height: 1.25;
-  margin-bottom: 18px;
-  letter-spacing: -0.02em;
-}
-
-/* Fixed-width Typing Effect to prevent box resizing */
-.highlight-box {
-  background: var(--accent-yellow);
-  color: var(--dark-charcoal);
-  padding: 4px 12px;
-  border-radius: 8px;
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-}
-
-.typing-text {
-  display: inline-block;
-  white-space: nowrap;
-  position: relative;
-  /* Reveal via clip-path instead of changing width */
-  animation: revealText 5s steps(13, end) infinite;
-  border-right: 3px solid var(--dark-charcoal);
-}
-
-@keyframes revealText {
-  0%, 10% { clip-path: inset(0 100% 0 0); }
-  50%, 80% { clip-path: inset(0 0 0 0); }
-  90%, 100% { clip-path: inset(0 100% 0 0); }
-}
-
-/* High-contrast subtitle and body text */
-.hero-text p.hero-subtitle {
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: #E2E8F0; /* Upgraded from muted gray to high-contrast white-gray */
-  line-height: 1.65;
-  margin-bottom: 28px;
-}
-
-/* High-contrast metrics strip */
-.hero-metrics-strip {
-  display: flex;
-  gap: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 20px;
-}
-
-.hero-metric-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.hero-metric-num {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: #FDE047; /* Bright yellow */
-}
-
-.hero-metric-desc {
-  font-size: 0.8rem;
-  color: #CBD5E1; /* High-contrast light gray */
-  font-weight: 600;
-}
-
- /* ===== HERO ILLUSTRATION (ENLARGED + RESTORED FRAME) ===== */
-.hero-illustration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  min-height: 280px; /* Scaled up height */
-  padding: 20px;
-  
-  /* Restores the missing yellow outline frame */
-  border: 2px dashed rgba(251, 192, 22, 0.4);
-  border-radius: var(--radius-md, 12px);
-  background: rgba(255, 255, 255, 0.02);
-  box-sizing: border-box;
-}
-
-/* Make SVG scale smoothly inside the container */
-.hero-illustration svg {
-  width: 100%;
-  max-width: 380px; /* Increased from 280px */
-  height: auto;
-  display: block;
-}
-
-  /* ===== MAIN CONTAINER & LAYOUT WITH LEFT SIDEBAR ===== */
-  .container {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  .section-heading {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .section-heading h2 {
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: var(--dark-charcoal);
-    margin-bottom: 12px;
-  }
-
-  .section-heading p {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  .content-layout {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-
-  /* ===== INTERACTIVE LEFT SIDEBAR WIDGET ===== */
-  .left-sidebar {
-    background: #FFFFFF;
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    box-shadow: 6px 6px 0px var(--dark-charcoal);
-    position: sticky;
-    top: 85px;
-  }
-
-  .sidebar-header {
-    border-bottom: 2px solid var(--light-bg);
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-  }
-
-  .sidebar-header h3 {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: var(--dark-charcoal);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .score-gauge-container {
-    background: var(--dark-charcoal);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    color: #FFFFFF;
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-    border: 2px solid var(--dark-charcoal);
-  }
-
-  .score-value {
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--accent-yellow);
-    line-height: 1;
-    margin-bottom: 6px;
-    transition: all 0.3s ease;
-  }
-
-  .score-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #94A3B8;
-  }
-
-  .interactive-check-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .check-item {
-    background: var(--light-bg);
-    border: 2px solid var(--border-color);
-    padding: 12px 14px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-  }
-
-  .check-item:hover {
-    border-color: var(--dark-charcoal);
-    transform: translateX(3px);
-  }
-
-  .check-item.active {
-    background: #F0FDF4;
-    border-color: var(--success-green);
-  }
-
-  .check-item-text {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--dark-charcoal);
-  }
-
-  .toggle-switch {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 2px solid var(--dark-charcoal);
-    background: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 0.75rem;
-    transition: all 0.2s;
-  }
-
-  .check-item.active .toggle-switch {
-    background: var(--success-green);
-    color: #FFFFFF;
-    border-color: var(--success-green);
-  }
-
-  .scanner-box {
-    background: #000000;
-    border-radius: 10px;
-    padding: 15px;
-    border: 2px solid var(--dark-charcoal);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .scanner-title {
-    color: #10B981;
-    font-family: monospace;
-    font-size: 0.75rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    background: #10B981;
-    border-radius: 50%;
-    animation: pulseBadge 1.5s infinite;
-  }
-
-  /* ===== CARDS GRID ===== */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    transition: all 0.25s ease;
-    cursor: pointer;
-    position: relative;
-    box-shadow: 5px 5px 0px var(--dark-charcoal);
-  }
-
-  .card:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 10px 10px 0px var(--dark-charcoal);
-  }
-
-  .card::after {
-    content: "Click to view details →";
-    display: block;
-    margin-top: 15px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--dark-charcoal);
-    text-decoration: underline;
-  }
-
-  .card-illustration {
-    height: 150px;
-    margin-bottom: 20px;
-    background: var(--light-bg);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 2px solid var(--dark-charcoal);
-  }
-
-  .card h3 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--dark-charcoal);
-    margin-bottom: 8px;
-  }
-
-  .card p {
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  /* ===== THREAT MATRIX BANNER ===== */
-  .threat-matrix-banner {
-    background: var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    color: #FFFFFF;
-    margin-top: 40px;
-    margin-bottom: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    box-shadow: 8px 8px 0px var(--accent-yellow);
-  }
-
-  .threat-matrix-banner h3 {
-    font-size: 2.2rem;
-    font-weight: 900;
-    margin-bottom: 14px;
-    color: #FDE047;
-    letter-spacing: -0.01em;
-  }
-
-  .threat-matrix-banner p {
-    color: #F8FAFC;
-    font-size: 1.15rem;
-    font-weight: 600;
-    line-height: 1.6;
-  }
-
-  .matrix-graphic-container {
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid var(--accent-yellow);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* ===== STATS BANNER ===== */
-  .stats-banner {
-    background: #FFFFFF;
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    padding: 44px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    text-align: center;
-    margin-bottom: 60px;
-    box-shadow: 6px 6px 0px var(--dark-charcoal);
-  }
-
-  .stat-card {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .stat-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .stat-number-box {
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--dark-charcoal);
-    background: var(--accent-yellow);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 16px;
-    border-radius: 8px;
-    border: 2px solid var(--dark-charcoal);
-    margin-bottom: 10px;
-    box-shadow: 3px 3px 0px var(--dark-charcoal);
-    min-width: 140px;
-  }
-
-  .stat-label {
-    font-size: 0.95rem;
-    color: var(--dark-charcoal);
-    font-weight: 700;
-  }
-
-  /* ===== ACTION PLAN ===== */
-  .action-plan {
-    background: #FFFFFF;
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    box-shadow: 8px 8px 0px var(--danger-red);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .action-plan-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .action-header h2 {
-    color: var(--dark-charcoal);
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 6px;
-  }
-
-  .action-header p {
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  .assistant-widget {
-    display: flex;
-    align-items: center;
-    background: var(--light-bg);
-    border: 2px solid var(--dark-charcoal);
-    padding: 10px 18px;
-    border-radius: 50px;
-    box-shadow: 3px 3px 0px var(--dark-charcoal);
-    gap: 14px;
-  }
-
-  .assistant-avatar-container {
-    width: 48px;
-    height: 48px;
-    background: var(--accent-yellow);
-    border: 2px solid var(--dark-charcoal);
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .assistant-speech {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--dark-charcoal);
-  }
-
-  .action-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-
-  .step-box {
-    background: var(--light-bg);
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: var(--dark-charcoal);
-    transition: all 0.3s ease;
-    animation: slideUpSteps 0.6s ease-out both;
-  }
-
-  .step-box:nth-child(1) { animation-delay: 0.1s; }
-  .step-box:nth-child(2) { animation-delay: 0.2s; }
-  .step-box:nth-child(3) { animation-delay: 0.3s; }
-  .step-box:nth-child(4) { animation-delay: 0.4s; }
-
-  .step-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 5px 5px 0px var(--dark-charcoal);
-    border-color: var(--accent-yellow);
-  }
-
-  .step-box.highlight {
-    background: var(--danger-red);
-    color: #FFFFFF;
-    border-color: var(--dark-charcoal);
-  }
-
-  .step-num {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 900;
-    margin-bottom: 10px;
-  }
-
-  /* ===== MODAL WINDOW ===== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(13, 14, 14, 0.75);
-    backdrop-filter: blur(6px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 20px;
-  }
-
-  .modal-overlay.active {
-    display: flex;
-  }
-
-  .modal-content {
-    background: #FFFFFF;
-    border: 3px solid var(--dark-charcoal);
-    border-radius: var(--radius-lg);
-    max-width: 650px;
-    width: 100%;
-    padding: 32px;
-    box-shadow: 12px 12px 0px var(--accent-yellow);
-    position: relative;
-    animation: fadeIn 0.25s ease-out;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    background: var(--light-bg);
-    border: 2px solid var(--dark-charcoal);
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    font-size: 1.2rem;
-    font-weight: 900;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-
-  .modal-close:hover {
-    background: var(--accent-yellow);
-  }
-
-  .modal-header-tag {
-    display: inline-block;
-    background: var(--accent-yellow);
-    color: var(--dark-charcoal);
-    font-size: 0.8rem;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    border: 1px solid var(--dark-charcoal);
-  }
-
-  .modal-title {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--dark-charcoal);
-    margin-bottom: 16px;
-  }
-
-  .modal-visual-hero {
-    background: var(--light-bg);
-    border: 2px solid var(--dark-charcoal);
-    border-radius: var(--radius-md);
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .modal-body {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .modal-action-box {
-    background: #FFFBEB;
-    border: 2px solid var(--dark-charcoal);
-    border-left: 6px solid var(--accent-yellow);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    font-weight: 700;
-    color: var(--dark-charcoal);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 3px 3px 0px var(--dark-charcoal);
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    text-align: center;
-    padding: 35px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    border-top: 2px solid var(--dark-charcoal);
-    background: #FFFFFF;
-    font-weight: 600;
-  }
-
-  @media (max-width: 1024px) {
-    .content-layout {
-      grid-template-columns: 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Security Awareness Training | IP ServerOne</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --accent-yellow: #FBC016;
+      --light-bg: #F5F6F6;
+      --dark-charcoal: #0D0E0E;
+      --card-bg: #FFFFFF;
+      --border-color: #E2E8F0;
+      --text-muted: #52525B;
+      --danger-red: #EF4444;
+      --success-green: #10B981;
+      --radius-lg: 20px;
+      --radius-md: 14px;
     }
-    .left-sidebar {
-      position: static;
-      margin-bottom: 30px;
-    }
-  }
 
-  @media (max-width: 900px) {
-    .hero-container-box, .grid-2, .stats-banner, .action-steps, .threat-matrix-banner, .action-plan-top {
-      grid-template-columns: 1fr;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+      background-size: 28px 28px;
+    }
+
+    /* ===== KEYFRAME ANIMATIONS ===== */
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(-3deg);
+      }
+    }
+
+    @keyframes avatarBobbing {
+
+      0%,
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+
+      50% {
+        transform: translateY(-4px) scale(1.03);
+      }
+    }
+
+    @keyframes pulseBadge {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes alertPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes audioWave {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scaleY(0.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scaleY(1.2);
+      }
+    }
+
+    @keyframes linkDash {
+      to {
+        stroke-dashoffset: -20;
+      }
+    }
+
+    @keyframes radarSweep {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes sineWave {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes waveHand {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+        transform-origin: bottom right;
+      }
+
+      25% {
+        transform: rotate(14deg);
+        transform-origin: bottom right;
+      }
+
+      75% {
+        transform: rotate(-8deg);
+        transform-origin: bottom right;
+      }
+    }
+
+    .animated-float {
+      animation: floatSlow 2.5s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    .animated-pulse {
+      animation: alertPulse 1.8s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    .animated-avatar {
+      animation: floatSlow 2.5s ease-in-out infinite;
+    }
+
+    .wave-1 {
+      animation: audioWave 1.2s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .wave-2 {
+      animation: audioWave 1.2s ease-in-out infinite 0.3s;
+      transform-origin: center;
+    }
+
+    .wave-3 {
+      animation: audioWave 1.2s ease-in-out infinite 0.6s;
+      transform-origin: center;
+    }
+
+    .dash-stream {
+      stroke-dasharray: 6 4;
+      animation: linkDash 1s linear infinite;
+    }
+
+    .waving-hand {
+      animation: waveHand 2.2s ease-in-out infinite;
+    }
+
+    /* ===== HEADER NAVIGATION ===== */
+    .header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--accent-yellow);
+      padding: 12px 40px;
+      height: 65px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 35px;
+      max-height: 35px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .tag {
+      background: var(--accent-yellow);
+      color: var(--dark-charcoal);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 20px;
+      animation: pulseBadge 3s infinite ease-in-out;
+      border: 1px solid var(--dark-charcoal);
+    }
+
+    /* ===== THREAT NEWSLETTER TICKER ===== */
+    .threat-ticker {
+      background: var(--dark-charcoal);
+      color: #FFFFFF;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--accent-yellow);
+      font-size: 0.9rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 99;
+    }
+
+    .ticker-badge {
+      background: var(--danger-red);
+      color: #FFFFFF;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-right: 12px;
+      border: 1px solid #FFFFFF;
+    }
+
+    .ticker-content-container {
+      overflow: hidden;
+      white-space: nowrap;
+      flex-grow: 1;
+      position: relative;
+      height: 24px;
+    }
+
+    .ticker-item {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: inline-block;
+    }
+
+    .ticker-item.active {
+      opacity: 1;
+    }
+
+    .ticker-action-btn {
+      background: var(--accent-yellow);
+      color: var(--dark-charcoal);
+      border: none;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: transform 0.2s;
+    }
+
+    .ticker-action-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== HERO SECTION WITH RESTORED GRID & EXACT GRAPHIC ===== */
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 30px;
+    }
+
+    .hero-container-box {
+      background-color: #0D0E0E;
+      /* Restored subtle yellow grid lines overlay */
+      background-image:
+        linear-gradient(to right, rgba(251, 192, 22, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(251, 192, 22, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: #FFFFFF;
+      border: 3px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 48px 56px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: 10px 10px 0px var(--accent-yellow);
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(251, 192, 22, 0.15);
+      border: 1px solid var(--accent-yellow);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #FDE047;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .status-pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-yellow);
+      border-radius: 50%;
+      animation: pulseBadge 1.5s infinite;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .highlight-box {
+      background: var(--accent-yellow);
+      color: var(--dark-charcoal);
+      padding: 4px 12px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .hero-text p.hero-subtitle {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #E2E8F0;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .hero-metrics-strip {
+      display: flex;
+      gap: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 20px;
+    }
+
+    .hero-metric-item {
       display: flex;
       flex-direction: column;
     }
-  }
-</style>
+
+    .hero-metric-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #FDE047;
+    }
+
+    .hero-metric-desc {
+      font-size: 1.0rem;
+      color: #CBD5E1;
+      font-weight: 700;
+    }
+
+    .hero-illustration {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+    }
+
+    /* ===== MAIN CONTAINER & LAYOUT ===== */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-heading h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--dark-charcoal);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ===== LEFT SIDEBAR (CALCULATOR) ===== */
+    .left-sidebar {
+      background: #FFFFFF;
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 6px 6px 0px var(--dark-charcoal);
+      position: sticky;
+      top: 85px;
+    }
+
+    .sidebar-header {
+      border-bottom: 2px solid var(--light-bg);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-header h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--dark-charcoal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .score-gauge-container {
+      background: var(--dark-charcoal);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .score-value {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--danger-red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--danger-red);
+    }
+
+    .score-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #27272A;
+      border-radius: 4px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .score-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--danger-red);
+      border-radius: 4px;
+      transition: width 0.4s ease, background-color 0.4s ease;
+    }
+
+    .interactive-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .check-item {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      padding: 14px 16px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .check-item:hover {
+      border-color: var(--dark-charcoal);
+    }
+
+    .check-item.active {
+      background: #F0FDF4;
+      border-color: var(--success-green);
+    }
+
+    .check-item-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .check-item-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--dark-charcoal);
+    }
+
+    .check-item-sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #64748B;
+      margin-top: 2px;
+    }
+
+    .toggle-checkbox-box {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 2px solid var(--dark-charcoal);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .check-item.active .toggle-checkbox-box {
+      background: var(--dark-charcoal);
+      color: #FFFFFF;
+    }
+
+    /* RADAR CONTAINER */
+    .scanner-box {
+      background: #000000;
+      border-radius: 12px;
+      padding: 16px;
+      border: 2px solid var(--dark-charcoal);
+    }
+
+    .scanner-title {
+      color: #10B981;
+      font-family: monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulseBadge 1.5s infinite;
+    }
+
+    .radar-canvas-container {
+      position: relative;
+      width: 100%;
+      height: 70px;
+      overflow: hidden;
+    }
+
+    .radar-sweep-line {
+      transform-origin: 120px 35px;
+      animation: radarSweep 3s linear infinite;
+    }
+
+    .wave-path-animated {
+      animation: sineWave 4s linear infinite;
+    }
+
+    /* ===== CARDS GRID ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      box-shadow: 5px 5px 0px var(--dark-charcoal);
+    }
+
+    .card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px 0px var(--dark-charcoal);
+    }
+
+    .card::after {
+      content: "Click to view details →";
+      display: block;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--dark-charcoal);
+      text-decoration: underline;
+    }
+
+    .card-illustration {
+      height: 150px;
+      margin-bottom: 20px;
+      background: var(--light-bg);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--dark-charcoal);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--dark-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== THREAT MATRIX BANNER ===== */
+    .threat-matrix-banner {
+      background: var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      color: #FFFFFF;
+      margin-top: 40px;
+      margin-bottom: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: 8px 8px 0px var(--accent-yellow);
+    }
+
+    .threat-matrix-banner h3 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+      color: #FDE047;
+    }
+
+    .matrix-graphic-container {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid var(--accent-yellow);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ===== STATS BANNER ===== */
+    .stats-banner {
+      background: #FFFFFF;
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+      margin-bottom: 60px;
+      box-shadow: 6px 6px 0px var(--dark-charcoal);
+    }
+
+    .stat-number-box {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--dark-charcoal);
+      background: var(--accent-yellow);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 16px;
+      border-radius: 8px;
+      border: 2px solid var(--dark-charcoal);
+      margin-bottom: 10px;
+      box-shadow: 3px 3px 0px var(--dark-charcoal);
+      min-width: 140px;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: var(--dark-charcoal);
+      font-weight: 700;
+    }
+
+    /* ===== ACTION PLAN ===== */
+    .action-plan {
+      background: #FFFFFF;
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: 8px 8px 0px var(--danger-red);
+    }
+
+    .action-plan-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .action-header h2 {
+      color: var(--dark-charcoal);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .assistant-widget {
+      display: flex;
+      align-items: center;
+      background: var(--light-bg);
+      border: 2px solid var(--dark-charcoal);
+      padding: 10px 18px;
+      border-radius: 50px;
+      box-shadow: 3px 3px 0px var(--dark-charcoal);
+      gap: 14px;
+    }
+
+    .assistant-avatar-container {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-yellow);
+      border: 2px solid var(--dark-charcoal);
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .recording-avatar-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 3px solid #000000;
+      border-radius: 50px;
+      padding: 6px 24px 6px 8px;
+      box-shadow: 4px 4px 0px #000000;
+      gap: 14px;
+      animation: avatarBobbing 2.5s ease-in-out infinite;
+    }
+
+    .avatar-icon-circle {
+      width: 48px;
+      height: 48px;
+      background: #FBC016;
+      border: 3px solid #000000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar-text-speech {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #000000;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .action-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step-box {
+      background: var(--light-bg);
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .step-box.highlight {
+      background: var(--danger-red);
+      color: #FFFFFF;
+    }
+
+    .step-num {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 14, 14, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #FFFFFF;
+      border: 3px solid var(--dark-charcoal);
+      border-radius: var(--radius-lg);
+      max-width: 650px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 12px 12px 0px var(--accent-yellow);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: var(--light-bg);
+      border: 2px solid var(--dark-charcoal);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-header-tag {
+      display: inline-block;
+      background: var(--accent-yellow);
+      color: var(--dark-charcoal);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px solid var(--dark-charcoal);
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--dark-charcoal);
+      margin-bottom: 16px;
+    }
+
+    .modal-visual-hero {
+      background: var(--light-bg);
+      border: 2px solid var(--dark-charcoal);
+      border-radius: var(--radius-md);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-action-box {
+      background: #FFFBEB;
+      border: 2px solid var(--dark-charcoal);
+      border-left: 6px solid var(--accent-yellow);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-weight: 700;
+      box-shadow: 3px 3px 0px var(--dark-charcoal);
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-top: 2px solid var(--dark-charcoal);
+      background: #FFFFFF;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1024px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .left-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-container-box,
+      .grid-2,
+      .stats-banner,
+      .action-steps,
+      .threat-matrix-banner {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- Header Navigation -->
@@ -967,76 +970,95 @@
     <div class="tag">Information Security Awareness Training 2026</div>
   </header>
 
-  <!-- Interactive AI Threat Newsletter Ticker -->
+  <!-- Threat Ticker -->
   <div class="threat-ticker">
     <div style="display: flex; align-items: center; flex-shrink: 0;">
       <span class="ticker-badge">Live Intel</span>
       <span>2026 Security Briefing:</span>
     </div>
-    <div class="ticker-content-container" id="tickerContainer">
-      <div class="ticker-item active">🚨 Autonomous AI multi-agent phishing campaigns detected targeting corporate email gateways.</div>
-      <div class="ticker-item">💡 Executive Voice Cloning (Vishing) attacks are on the rise—always verify instructions via internal chat.</div>
-      <div class="ticker-item">⚡ Zero-day vulnerabilities are being exploited 3x faster using automated LLM exploit scripts.</div>
+    <div class="ticker-content-container">
+      <div class="ticker-item active">🚨 Autonomous AI multi-agent phishing campaigns detected targeting corporate email
+        gateways.</div>
+      <div class="ticker-item">💡 Executive Voice Cloning (Vishing) attacks are on the rise—always verify instructions
+        via internal chat.</div>
+      <div class="ticker-item">⚡ Zero-day vulnerabilities are being exploited 3x faster using automated LLM exploit
+        scripts.</div>
     </div>
     <button class="ticker-action-btn" onclick="openModal('ai-phishing')">View Brief</button>
   </div>
 
   <!-- Hero Section -->
   <section class="hero">
-  <div class="hero-container-box">
-    <div class="hero-text">
-      <div class="hero-status-pill">
-        <span class="status-pulse-dot"></span>
-        <span>BUSINESS DEFENSE INTELLIGENCE</span>
+    <div class="hero-container-box">
+      <div class="hero-text">
+        <div class="hero-status-pill">
+          <span class="status-pulse-dot"></span>
+          <span>BUSINESS DEFENSE INTELLIGENCE</span>
+        </div>
+        <h1>Automated Adversaries Are <span class="highlight-box">Scaling Fast.</span></h1>
+        <p class="hero-subtitle">
+          AI-driven phishing, voice cloning, and session token hijacking are escalating rapidly. Reinforce your
+          frontline defensive posture to protect corporate assets.
+        </p>
+        <div class="hero-metrics-strip">
+          <div class="hero-metric-item">
+            <span class="hero-metric-num">The Threat</span>
+            <span class="hero-metric-desc">Automated AI Attacks</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-num">The Policy</span>
+            <span class="hero-metric-desc">Never Trust, Always Verify</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-num">Your Role</span>
+            <span class="hero-metric-desc">Report Suspicious</span>
+          </div>
+        </div>
       </div>
-      <h1>Automated Adversaries Are <span class="highlight-box"><span class="typing-text">Scaling Fast.</span></span></h1>
-      <p class="hero-subtitle">
-        AI-driven phishing, voice cloning, and session token hijacking are escalating rapidly. Reinforce your frontline defensive posture to protect corporate assets.
-      </p>
-      <div class="hero-metrics-strip">
-  <div class="hero-metric-item">
-    <span class="hero-metric-num">The Threat</span>
-    <span class="hero-metric-desc">Automated AI Attacks</span>
-  </div>
-  <div class="hero-metric-item">
-    <span class="hero-metric-num">The Policy</span>
-    <span class="hero-metric-desc">Never Trust, Always Verify</span>
-  </div>
-  <div class="hero-metric-item">
-    <span class="hero-metric-num">Your Role</span>
-    <span class="hero-metric-desc">Report Suspicious</span>
-  </div>
-</div>
-    </div>
-    <div class="hero-illustration">
-  <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Animated gear background element -->
-    <g class="animated-gear">
-      <path d="M310 70 A 25 25 0 1 0 310 120 A 25 25 0 1 0 310 70" fill="none" stroke="#FBC016" stroke-width="5" stroke-dasharray="6 4"/>
-    </g>
-    
-    <!-- Cloud graphic -->
-    <path d="M120 70 Q140 50 170 60 Q190 40 220 50 Q240 60 230 80 H110 Q100 70 120 70 Z" fill="#F5F6F6"/>
-    
-    <!-- Screen base -->
-    <rect x="140" y="90" width="210" height="135" rx="10" fill="#0D0E0E"/>
-    <rect x="150" y="100" width="190" height="115" rx="6" fill="#FFFFFF"/>
-    
-    <!-- Base shadow/stand -->
-    <path d="M100 235 L390 235 L370 225 L120 225 Z" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
-    
-    <!-- Floating shield icon -->
-    <g class="animated-float">
-      <path d="M240 105 L295 125 V165 C295 195 240 215 240 215 C240 215 185 195 185 165 V125 L240 105 Z" fill="#FBC016" stroke="#0D0E0E" stroke-width="3"/>
-      <rect x="225" y="150" width="30" height="25" rx="4" fill="#0D0E0E"/>
-      <path d="M232 150 V142 A 8 8 0 0 1 248 142 V150" fill="none" stroke="#0D0E0E" stroke-width="3"/>
-    </g>
-  </svg>
-</div>
-  </div>
-</section>
 
-  <!-- Main Grid Section with Left Sidebar -->
+      <!-- Top Hero Vector Illustration (Matched directly from recording 00:00) -->
+      <div class="hero-illustration">
+        <svg viewBox="0 0 340 240" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- White Floating Cloud (Top Left) -->
+          <g class="animated-float">
+            <path
+              d="M 65 95 C 65 85, 75 75, 88 75 C 93 68, 103 63, 115 65 C 127 63, 137 70, 141 80 C 150 82, 156 90, 154 100 C 156 108, 148 115, 138 115 L 75 115 C 65 115, 58 107, 65 95 Z"
+              fill="#FFFFFF" />
+          </g>
+
+          <!-- Yellow Folder with Shield / Lock (Middle Right) -->
+          <g class="animated-float" style="animation-delay: -1.5s;">
+            <!-- Back Folder Tab -->
+            <path
+              d="M 195 90 L 230 90 C 235 90 238 93 240 96 L 248 108 L 295 108 C 302 108 308 114 308 121 L 308 200 C 308 207 302 213 295 213 L 210 213 C 203 213 197 207 197 200 L 195 90 Z"
+              fill="#FBC016" />
+            <!-- Front Folder Body -->
+            <rect x="202" y="115" width="108" height="98" rx="10" fill="#FBC016" />
+            <rect x="202" y="115" width="108" height="98" rx="10" stroke="#FFFFFF" stroke-width="3" fill="none" />
+          </g>
+
+          <!-- White Open Laptop Frame -->
+          <!-- Screen Shell -->
+          <rect x="85" y="110" width="180" height="110" rx="12" fill="#FFFFFF" />
+          <rect x="95" y="120" width="160" height="90" rx="6" fill="#0D0E0E" />
+          <!-- Keyboard Base -->
+          <path
+            d="M 60 220 L 290 220 C 298 220 304 225 300 230 L 292 234 C 288 236 280 238 270 238 L 80 238 C 70 238 62 236 58 234 L 50 230 C 46 225 52 220 60 220 Z"
+            fill="#FFFFFF" />
+
+          <!-- Lock Shield Emblem centered on Laptop Screen -->
+          <g>
+            <path d="M 175 135 L 205 145 V 172 C 205 190 175 200 175 200 C 175 200 145 190 145 172 V 145 L 175 135 Z"
+              fill="#FBC016" />
+            <rect x="165" y="162" width="20" height="18" rx="3" fill="#0D0E0E" />
+            <path d="M 169 162 V 156 A 6 6 0 0 1 181 156 V 162" fill="none" stroke="#0D0E0E" stroke-width="2.5" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Grid Section -->
   <div class="container">
     <div class="section-heading">
       <h2>Primary Exploit Vectors & Security Scorecard</h2>
@@ -1044,71 +1066,95 @@
     </div>
 
     <div class="content-layout">
-      
-      <!-- LEFT SIDEBAR: INTERACTIVE THREAT SCORECARD -->
+
+      <!-- CALCULATOR SIDEBAR -->
       <aside class="left-sidebar">
         <div class="sidebar-header">
           <h3>⚡ Security Index Calculator</h3>
         </div>
 
         <div class="score-gauge-container">
-          <div class="score-value" id="securityScore">60%</div>
-          <div class="score-label" id="scoreStatus">MODERATE DEFENSE</div>
+          <div class="score-value" id="securityScore">0%</div>
+          <div class="score-label" id="scoreStatus">HIGH VULNERABILITY</div>
+          <div class="score-progress-bar">
+            <div class="score-progress-fill" id="scoreProgressFill"></div>
+          </div>
         </div>
 
-        <p style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 12px;">
+        <p style="font-size: 0.88rem; font-weight: 800; color: var(--dark-charcoal); margin-bottom: 14px;">
           Toggle your active security controls:
         </p>
 
         <div class="interactive-check-list">
-          <div class="check-item active" onclick="toggleControl(this, 20)">
-            <span class="check-item-text">Hardware FIDO2 Key</span>
-            <span class="toggle-switch">✓</span>
+          <div class="check-item" data-weight="20" onclick="toggleControlItem(this)">
+            <div class="check-item-text">
+              <span class="check-item-title">2-Step Login (2FA / OTP)</span>
+              <span class="check-item-sub">Multi-Factor Authentication (MFA)</span>
+            </div>
+            <span class="toggle-checkbox-box"></span>
           </div>
-          <div class="check-item active" onclick="toggleControl(this, 20)">
-            <span class="check-item-text">Phishing Awareness</span>
-            <span class="toggle-switch">✓</span>
+
+          <div class="check-item" data-weight="20" onclick="toggleControlItem(this)">
+            <div class="check-item-text">
+              <span class="check-item-title">Spot & Report Phishing Emails</span>
+              <span class="check-item-sub">Phishing Awareness</span>
+            </div>
+            <span class="toggle-checkbox-box"></span>
           </div>
-          <div class="check-item" onclick="toggleControl(this, 20)">
-            <span class="check-item-text">Browser Cookie Shield</span>
-            <span class="toggle-switch"></span>
+
+          <div class="check-item" data-weight="20" onclick="toggleControlItem(this)">
+            <div class="check-item-text">
+              <span class="check-item-title">Avoid Saving Passwords in Browser</span>
+              <span class="check-item-sub">Browser Cookie Shield</span>
+            </div>
+            <span class="toggle-checkbox-box"></span>
           </div>
-          <div class="check-item" onclick="toggleControl(this, 20)">
-            <span class="check-item-text">Voice Callback Protocol</span>
-            <span class="toggle-switch"></span>
+
+          <div class="check-item" data-weight="20" onclick="toggleControlItem(this)">
+            <div class="check-item-text">
+              <span class="check-item-title">Verify Urgent Requests by Phone</span>
+              <span class="check-item-sub">Voice Callback Protocol</span>
+            </div>
+            <span class="toggle-checkbox-box"></span>
           </div>
-          <div class="check-item active" onclick="toggleControl(this, 20)">
-            <span class="check-item-text">Automated Endpoint Scans</span>
-            <span class="toggle-switch">✓</span>
+
+          <div class="check-item" data-weight="20" onclick="toggleControlItem(this)">
+            <div class="check-item-text">
+              <span class="check-item-title">Keep Devices & Software Updated</span>
+              <span class="check-item-sub">Automated Endpoint Scans</span>
+            </div>
+            <span class="toggle-checkbox-box"></span>
           </div>
         </div>
 
-        <!-- Live Animated Scanner -->
+        <!-- Animated Live Radar Box -->
         <div class="scanner-box">
           <div class="scanner-title">
             <span>LIVE MONITORED RADAR</span>
             <span class="live-dot"></span>
           </div>
-          <svg width="100%" height="60" viewBox="0 0 240 60" fill="none">
-            <path d="M0 30 Q30 10 60 30 T120 30 T180 30 T240 30" stroke="#10B981" stroke-width="2" fill="none"/>
-            <circle cx="120" cy="30" r="18" stroke="#10B981" stroke-width="1.5" fill="none" opacity="0.6"/>
-            <line x1="120" y1="30" x2="135" y2="18" stroke="#10B981" stroke-width="2" stroke-linecap="round">
-              <animateTransform attributeName="transform" type="rotate" from="0 120 30" to="360 120 30" dur="3s" repeatCount="indefinite"/>
-            </line>
-          </svg>
+          <div class="radar-canvas-container">
+            <svg width="100%" height="70" viewBox="0 0 240 70" fill="none">
+              <path d="M-120 35 Q-90 15 -60 35 T0 35 T60 35 T120 35 T180 35 T240 35 T300 35 T360 35" stroke="#10B981"
+                stroke-width="2" fill="none" class="wave-path-animated" />
+              <circle cx="120" cy="35" r="22" stroke="#10B981" stroke-width="1.5" fill="none" opacity="0.6" />
+              <line x1="120" y1="35" x2="140" y2="20" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"
+                class="radar-sweep-line" />
+            </svg>
+          </div>
         </div>
       </aside>
 
-      <!-- RIGHT COLUMN: THREAT CARDS GRID -->
+      <!-- RIGHT COLUMN: 6 ANIMATED THREAT CARDS -->
       <main>
-        <!-- Grid 1 -->
         <div class="grid-2">
           <div class="card" onclick="openModal('ai-phishing')">
             <div class="card-illustration">
-              <svg width="90" height="90" viewBox="0 0 100 100" fill="none" class="animated-float">
-                <rect x="15" y="25" width="70" height="50" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-                <path d="M15 30 L50 52 L85 30" stroke="#0D0E0E" stroke-width="3"/>
-                <circle cx="72" cy="62" r="12" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
+              <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+                <rect x="15" y="25" width="70" height="50" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3" />
+                <path d="M15 30 L50 52 L85 30" stroke="#0D0E0E" stroke-width="3" />
+                <circle cx="72" cy="62" r="12" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"
+                  class="animated-pulse" />
                 <text x="69" y="67" fill="#0D0E0E" font-weight="900" font-size="14">!</text>
               </svg>
             </div>
@@ -1119,184 +1165,189 @@
           <div class="card" onclick="openModal('cookie-theft')">
             <div class="card-illustration">
               <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
-                <rect x="15" y="20" width="70" height="60" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-                <line x1="15" y1="35" x2="85" y2="35" stroke="#0D0E0E" stroke-width="2"/>
-                <circle cx="25" cy="27" r="2.5" fill="#EF4444"/>
-                <circle cx="32" cy="27" r="2.5" fill="#FBC016"/>
-                <circle cx="39" cy="27" r="2.5" fill="#10B981"/>
+                <rect x="15" y="20" width="70" height="60" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3" />
+                <line x1="15" y1="35" x2="85" y2="35" stroke="#0D0E0E" stroke-width="2" />
+                <circle cx="25" cy="27" r="2.5" fill="#EF4444" />
+                <circle cx="32" cy="27" r="2.5" fill="#FBC016" />
+                <circle cx="39" cy="27" r="2.5" fill="#10B981" />
                 <g class="animated-float">
-                  <rect x="30" y="48" width="40" height="20" rx="4" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
-                  <path d="M40 58 h20" stroke="#0D0E0E" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="30" y="48" width="40" height="20" rx="4" fill="#FBC016" stroke="#0D0E0E" stroke-width="2" />
+                  <path d="M40 58 h20" stroke="#0D0E0E" stroke-width="3" stroke-linecap="round" />
                 </g>
               </svg>
             </div>
             <h3>Session Cookie Theft</h3>
-            <p>Infostealer malware steals browser tokens to skip Multi-Factor Authentication (MFA) triggers entirely.</p>
+            <p>Infostealer malware steals browser tokens to skip Multi-Factor Authentication (MFA) triggers entirely.
+            </p>
           </div>
         </div>
 
-        <!-- Grid 2 -->
         <div class="grid-2">
           <div class="card" onclick="openModal('smishing')">
             <div class="card-illustration">
-              <svg width="90" height="90" viewBox="0 0 100 100" fill="none" class="animated-float">
-                <rect x="30" y="15" width="40" height="70" rx="8" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-                <rect x="38" y="30" width="24" height="16" rx="3" fill="#FBC016" stroke="#0D0E0E" stroke-width="1.5"/>
-                <circle cx="50" cy="76" r="3" fill="#0D0E0E"/>
+              <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+                <rect x="30" y="15" width="40" height="70" rx="8" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3" />
+                <rect x="38" y="30" width="24" height="16" rx="3" fill="#FBC016" stroke="#0D0E0E" stroke-width="1.5"
+                  class="animated-pulse" />
+                <circle cx="50" cy="76" r="3" fill="#0D0E0E" />
               </svg>
             </div>
-            <h3>Smishing & SMS Alerts</h3>
-            <p>Fraudulent text alerts claiming urgent IT maintenance or banking security lockouts.</p>
+            <h3>Smishing & Mobile Scams</h3>
+            <p>SMS phishing messages lure users into fraudulent authentication portals.</p>
           </div>
 
           <div class="card" onclick="openModal('vishing')">
             <div class="card-illustration">
               <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="32" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-                <path d="M32 50 C32 35 68 35 68 50" fill="none" stroke="#0D0E0E" stroke-width="3"/>
-                <rect x="28" y="46" width="8" height="14" rx="2" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
-                <rect x="64" y="46" width="8" height="14" rx="2" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
+                <circle cx="50" cy="50" r="35" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3" />
+                <path d="M40 38 Q50 30 60 38" stroke="#EF4444" stroke-width="3" fill="none" stroke-linecap="round"
+                  class="wave-1" />
+                <path d="M35 52 Q50 42 65 52" stroke="#EF4444" stroke-width="3" fill="none" stroke-linecap="round"
+                  class="wave-2" />
+                <path d="M30 66 Q50 54 70 66" stroke="#EF4444" stroke-width="3" fill="none" stroke-linecap="round"
+                  class="wave-3" />
               </svg>
             </div>
-            <h3>Voice Vishing</h3>
-            <p>Attackers use AI voice synthesis over phone calls to impersonate internal executives.</p>
+            <h3>Voice Cloning (Vishing)</h3>
+            <p>AI audio synthesizer tools imitate executives' voices to bypass authorization limits.</p>
           </div>
         </div>
 
-        <!-- Grid 3 -->
         <div class="grid-2">
+          <div class="card" onclick="openModal('ransomware')">
+            <div class="card-illustration">
+              <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+                <rect x="25" y="25" width="50" height="50" rx="8" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3" />
+                <path d="M35 45 H65 M35 55 H55" stroke="#EF4444" stroke-width="3" stroke-linecap="round" />
+                <circle cx="65" cy="65" r="10" fill="#EF4444" stroke="#0D0E0E" stroke-width="2"
+                  class="animated-pulse" />
+                <text x="62" y="70" fill="#FFFFFF" font-weight="900" font-size="12">!</text>
+              </svg>
+            </div>
+            <h3>Ransomware & Extortion</h3>
+            <p>Malicious payloads encrypt local files and threaten double-extortion data exfiltrations.</p>
+          </div>
+
           <div class="card" onclick="openModal('supply-chain')">
             <div class="card-illustration">
               <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
-                <rect x="20" y="35" width="26" height="26" rx="4" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-                <rect x="54" y="35" width="26" height="26" rx="4" fill="#FBC016" stroke="#0D0E0E" stroke-width="3" class="animated-float"/>
-                <path d="M46 48 L54 48" stroke="#0D0E0E" stroke-width="3" stroke-dasharray="2 2"/>
+                <rect x="20" y="35" width="25" height="25" rx="4" fill="#FBC016" stroke="#0D0E0E" stroke-width="2" />
+                <rect x="55" y="35" width="25" height="25" rx="4" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2" />
+                <path d="M45 47 H55" stroke="#0D0E0E" stroke-width="3" class="dash-stream" />
               </svg>
             </div>
-            <h3>Supply Chain Attacks</h3>
-            <p>Exploiting software update mechanisms in trusted third-party vendor platforms.</p>
+            <h3>Supply Chain Compromise</h3>
+            <p>Threat actors exploit trusted third-party vendor applications to access internal assets.</p>
+          </div>
+        </div>
+
+        <!-- Threat Matrix Banner -->
+        <div class="threat-matrix-banner">
+          <div>
+            <h3>Enterprise Cyber Resilience</h3>
+            <p>Security is a shared responsibility. Consistently applying endpoint hygiene and verifying identity
+              protects IP ServerOne operations.</p>
+          </div>
+          <div class="matrix-graphic-container">
+            <svg width="200" height="120" viewBox="0 0 200 120" fill="none">
+              <rect x="10" y="10" width="180" height="100" rx="8" fill="#0D0E0E" stroke="#FBC016" stroke-width="2" />
+              <line x1="10" y1="40" x2="190" y2="40" stroke="#FBC016" stroke-width="1" />
+              <circle cx="40" cy="75" r="12" fill="#10B981" class="animated-pulse" />
+              <circle cx="100" cy="75" r="12" fill="#FBC016" class="animated-pulse" />
+              <circle cx="160" cy="75" r="12" fill="#EF4444" class="animated-pulse" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Stats Banner -->
+        <div class="stats-banner" id="statsBanner">
+          <div class="stat-card">
+            <div class="stat-number-box"><span class="counter" data-target="98" data-suffix="%">0%</span></div>
+            <div class="stat-label">Attacks Stopped by MFA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number-box"><span class="counter" data-target="3.4" data-decimals="1"
+                data-suffix="x">0x</span></div>
+            <div class="stat-label">Increase in AI Phishing</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number-box"><span class="counter" data-target="12" data-suffix="m">0m</span></div>
+            <div class="stat-label">Avg Token Expiry Ideal</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number-box"><span class="counter" data-target="100" data-suffix="%">0%</span></div>
+            <div class="stat-label">Vigilance Required</div>
+          </div>
+        </div>
+
+        <!-- Action Plan & Avatar Widget -->
+        <div class="action-plan">
+          <div class="action-plan-top">
+            <div class="action-header">
+              <h2>4 Steps to Secure Your Daily Workflow</h2>
+              <strong><p>Follow official IT guidelines to keep corporate access secure and compliant.</p></strong>
+            </div>
+
+            <div class="assistant-widget animated-avatar">
+              <div class="assistant-avatar-container">
+                <svg viewBox="0 0 120 120" width="100%" height="100%" style="background:#FBC016;">
+                  <circle cx="60" cy="55" r="32" fill="#0D0E0E" />
+                  <ellipse cx="60" cy="62" rx="27" ry="24" fill="#FFFFFF" />
+                  <path d="M35 55 Q60 40 85 55" fill="#0D0E0E" />
+                  <circle cx="48" cy="56" r="3" fill="#0D0E0E" />
+                  <circle cx="72" cy="56" r="3" fill="#0D0E0E" />
+                  <path d="M52 66 Q60 74 68 66" fill="none" stroke="#0D0E0E" stroke-width="2.5"
+                    stroke-linecap="round" />
+                  <ellipse cx="38" cy="63" rx="4" ry="2.5" fill="#F472B6" />
+                  <ellipse cx="82" cy="63" rx="4" ry="2.5" fill="#F472B6" />
+                  <g class="waving-hand">
+                    <path d="M82 82 Q92 78 90 70 Q88 66 84 72" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5" />
+                  </g>
+                </svg>
+              </div>
+              <div class="assistant-speech">
+                <strong>"Use approved tools only! Stay safe!"</strong>
+              </div>
+            </div>
           </div>
 
-          <div class="card" onclick="openModal('fido-keys')">
-            <div class="card-illustration">
-              <svg width="90" height="90" viewBox="0 0 100 100" fill="none" class="animated-float">
-                <rect x="40" y="25" width="20" height="50" rx="5" fill="#0D0E0E"/>
-                <rect x="44" y="15" width="12" height="12" fill="#FBC016"/>
-                <circle cx="50" cy="55" r="5" fill="#FBC016"/>
-              </svg>
+          <div class="action-steps">
+            <div class="step-box highlight">
+              <span class="step-num">STEP 01</span>
+              <strong>Use Approved MFA Only</strong><br>
+              Third-party authenticator apps and browser MFA extensions are strictly prohibited.
             </div>
-            <h3>FIDO2 Hardware Keys</h3>
-            <p>Physical token verification prevents reverse-proxy phishing key interception.</p>
+            <div class="step-box">
+              <span class="step-num">STEP 02</span>
+              <strong>Remove Unapproved Extensions</strong><br>
+              Uninstall unauthorized browser add-ons and password auto-fill extensions immediately.
+            </div>
+            <div class="step-box">
+              <span class="step-num">STEP 03</span>
+              <strong>Store Keys Securely</strong><br>
+              Never save corporate tokens or credentials inside browser local stores.
+            </div>
+            <div class="step-box">
+              <span class="step-num">STEP 04</span>
+              <strong>Report Policy Violations</strong><br>
+              Reach out to the IT Security Desk if you need assistance configuring approved MFA devices.
+            </div>
           </div>
         </div>
       </main>
     </div>
-
-    <!-- Threat Matrix Feature Banner -->
-    <div class="threat-matrix-banner">
-      <div>
-        <h3>Proactive MFA Protection</h3>
-        <p>Multi-Factor Authentication combined with physical FIDO2 keys eliminates 99% of password-based compromise risks.</p>
-      </div>
-      <div class="matrix-graphic-container">
-        <svg width="180" height="120" viewBox="0 0 200 140" fill="none">
-          <rect x="20" y="15" width="160" height="110" rx="10" fill="#FFFFFF" stroke="#FBC016" stroke-width="3"/>
-          <path d="M100 35 L130 50 V80 C130 100 100 110 100 110 C100 110 70 100 70 80 V50 L100 35 Z" fill="#FBC016" stroke="#0D0E0E" stroke-width="3" class="animated-float"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- Stats Banner -->
-<div class="stats-banner" id="statsBanner">
-  <div class="stat-card">
-    <div class="stat-number-box">
-      <span class="counter" data-target="91" data-suffix="%">0%</span>
-    </div>
-    <div class="stat-label">Attacks start via phishing</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number-box">
-      <span class="counter" data-target="3" data-suffix="x">0x</span>
-    </div>
-    <div class="stat-label">Increase in cookie theft</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number-box">
-      <span class="counter" data-target="100" data-suffix="%">0%</span>
-    </div>
-    <div class="stat-label">MFA compliance required</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number-box">
-      <span class="counter" data-prefix="< " data-target="15" data-suffix="s">&lt; 0s</span>
-    </div>
-    <div class="stat-label">Automated exploit speed</div>
-  </div>
-</div>
-
-    <!-- Action Plan -->
-    <div class="action-plan">
-      <div class="action-plan-top">
-        <div class="action-header">
-          <h2>Threat Incident Action Plan</h2>
-          <p>Follow these mandatory steps immediately if a breach is suspected.</p>
-        </div>
-        <div class="assistant-widget animated-avatar">
-          <div class="assistant-avatar-container">
-            <svg viewBox="0 0 120 120" width="100%" height="100%" style="background:#FBC016;">
-              <circle cx="60" cy="55" r="32" fill="#0D0E0E"/>
-              <ellipse cx="60" cy="62" rx="27" ry="24" fill="#FFFFFF"/>
-              <path d="M35 55 Q60 40 85 55" fill="#0D0E0E"/>
-              <circle cx="48" cy="56" r="3" fill="#0D0E0E"/>
-              <circle cx="72" cy="56" r="3" fill="#0D0E0E"/>
-              <path d="M52 66 Q60 74 68 66" fill="none" stroke="#0D0E0E" stroke-width="2.5" stroke-linecap="round"/>
-              <ellipse cx="38" cy="63" rx="4" ry="2.5" fill="#F472B6"/>
-              <ellipse cx="82" cy="63" rx="4" ry="2.5" fill="#F472B6"/>
-              <g class="waving-hand">
-                <path d="M82 82 Q92 78 90 70 Q88 66 84 72" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5"/>
-              </g>
-            </svg>
-          </div>
-          <div class="assistant-speech">
-            "Stay safe! Follow these steps!"
-          </div>
-        </div>
-      </div>
-      <div class="action-steps">
-        <div class="step-box">
-          <span class="step-num">STEP 01</span>
-          Halt activity. Do not click links or enter passwords.
-        </div>
-        <div class="step-box">
-          <span class="step-num">STEP 02</span>
-          Do not forward suspicious messages externally.
-        </div>
-        <div class="step-box">
-          <span class="step-num">STEP 03</span>
-          Take clear screenshots of email headers and text.
-        </div>
-        <div class="step-box highlight">
-          <span class="step-num">STEP 04</span>
-          Notify your direct supervisor immediately.
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- Modal Window -->
+  <!-- Modal Component -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <span class="modal-header-tag" id="modalTag">Threat Protocol</span>
-      <h3 class="modal-title" id="modalTitle">Threat Category</h3>
-      
-      <div class="modal-visual-hero" id="modalGraphic"></div>
-
-      <p class="modal-body" id="modalBody">Detailed breakdown content...</p>
-      
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span class="modal-header-tag" id="modalTag">THREAT BRIEFING</span>
+      <h2 class="modal-title" id="modalTitle">Threat Title</h2>
+      <div class="modal-visual-hero" id="modalVisual"></div>
+      <p class="modal-body" id="modalBody">Threat detailed description goes here...</p>
       <div class="modal-action-box" id="modalAction">
-        <span style="font-size: 1.4rem;">🛡️</span>
-        <span id="modalActionText">Required Defensive Step: Report immediately to IT.</span>
+        💡 <strong>Key Takeaway:</strong> Always verify before taking high-risk actions.
       </div>
     </div>
   </div>
@@ -1306,161 +1357,144 @@
     Copyright © 2026 IP ServerOne Solutions Sdn Bhd. All rights reserved.
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Newsletter Ticker Rotator Script
-    let currentTickerIndex = 0;
-    const tickerItems = document.querySelectorAll('.ticker-item');
-    
-    function rotateTicker() {
-      tickerItems[currentTickerIndex].classList.remove('active');
-      currentTickerIndex = (currentTickerIndex + 1) % tickerItems.length;
-      tickerItems[currentTickerIndex].classList.add('active');
+    // Calculator Toggle Logic
+    function toggleControlItem(element) {
+      element.classList.toggle('active');
+      const toggleBox = element.querySelector('.toggle-checkbox-box');
+      toggleBox.textContent = element.classList.contains('active') ? '✓' : '';
+      recalculateSecurityScore();
     }
-    setInterval(rotateTicker, 4000);
 
-    // Sidebar Interactive Scorecard Handler
-    let currentScore = 60;
-    
-    function toggleControl(element, points) {
-      const toggleSwitch = element.querySelector('.toggle-switch');
-      if (element.classList.contains('active')) {
-        element.classList.remove('active');
-        toggleSwitch.innerText = '';
-        currentScore -= points;
-      } else {
-        element.classList.add('active');
-        toggleSwitch.innerText = '✓';
-        currentScore += points;
-      }
-      
-      const scoreElem = document.getElementById('securityScore');
-      const statusElem = document.getElementById('scoreStatus');
-      scoreElem.innerText = currentScore + '%';
+    function recalculateSecurityScore() {
+      const activeItems = document.querySelectorAll('.interactive-check-list .check-item.active');
+      let score = 0;
+      activeItems.forEach(item => {
+        score += parseInt(item.getAttribute('data-weight') || '20', 10);
+      });
 
-      if (currentScore >= 80) {
-        scoreElem.style.color = '#10B981';
-        statusElem.innerText = 'OPTIMAL DEFENSE';
-      } else if (currentScore >= 40) {
-        scoreElem.style.color = '#FBC016';
-        statusElem.innerText = 'MODERATE DEFENSE';
+      const scoreValueEl = document.getElementById('securityScore');
+      const scoreStatusEl = document.getElementById('scoreStatus');
+      const fillEl = document.getElementById('scoreProgressFill');
+
+      scoreValueEl.textContent = score + '%';
+      fillEl.style.width = score + '%';
+
+      if (score >= 80) {
+        scoreStatusEl.textContent = 'HIGH DEFENSE POSTURE';
+        scoreStatusEl.style.color = '#10B981';
+        scoreValueEl.style.color = '#10B981';
+        fillEl.style.backgroundColor = '#10B981';
+      } else if (score >= 40) {
+        scoreStatusEl.textContent = 'MODERATE DEFENSE';
+        scoreStatusEl.style.color = '#FBC016';
+        scoreValueEl.style.color = '#FBC016';
+        fillEl.style.backgroundColor = '#FBC016';
       } else {
-        scoreElem.style.color = '#EF4444';
-        statusElem.innerText = 'CRITICAL VULNERABILITY';
+        scoreStatusEl.textContent = 'HIGH VULNERABILITY';
+        scoreStatusEl.style.color = '#EF4444';
+        scoreValueEl.style.color = '#EF4444';
+        fillEl.style.backgroundColor = '#EF4444';
       }
     }
 
-    // Modal Content Data
-    const modalData = {
+    // Dynamic Scroll-Triggered Counting Animation Function
+    let activeTimers = [];
+    function animateCounters() {
+      activeTimers.forEach(timer => clearInterval(timer));
+      activeTimers = [];
+
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const decimals = parseInt(counter.getAttribute('data-decimals') || '0', 10);
+        let start = 0;
+        const duration = 1200;
+        const stepTime = 20;
+        const steps = duration / stepTime;
+        const increment = target / steps;
+
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            counter.textContent = target.toFixed(decimals) + suffix;
+            clearInterval(timer);
+          } else {
+            counter.textContent = start.toFixed(decimals) + suffix;
+          }
+        }, stepTime);
+        activeTimers.push(timer);
+      });
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsElement = document.getElementById('statsBanner');
+    if (statsElement) statsObserver.observe(statsElement);
+
+    // Modal Definitions
+    const threatDetails = {
       'ai-phishing': {
-        tag: "VECTOR 01 - E-MAIL THREAT",
-        title: "AI-Generated Phishing",
-        graphic: `
-          <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-            <circle cx="240" cy="60" r="25" fill="none" stroke="#FBC016" stroke-width="2" class="svg-pulse-wave"/>
-            <rect x="30" y="25" width="120" height="70" rx="8" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5"/>
-            <path d="M40 45 h100 M40 65 h70 M40 75 h50" stroke="#0D0E0E" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="160" cy="60" r="4" fill="#EF4444" class="svg-data-packet"/>
-            <circle cx="180" cy="60" r="4" fill="#FBC016" class="svg-data-packet"/>
-            <circle cx="240" cy="60" r="32" fill="#FBC016" stroke="#0D0E0E" stroke-width="3"/>
-            <text x="222" y="66" fill="#0D0E0E" font-weight="900" font-size="15">AI BOT</text>
-          </svg>`,
-        body: "Modern attackers utilize generative AI models to craft flawless corporate emails customized with internal department names, ongoing project titles, and executive phrasing without spelling errors.",
-        action: "Always verify unexpected requests via a separate internal communication channel (Slack or Teams)."
+        tag: 'CRITICAL THREAT',
+        title: 'AI Multi-Agent Phishing',
+        visual: '🤖📧',
+        body: 'Adversaries utilize generative AI models to compose hyper-personalized phishing emails tailored to company roles. These messages bypass traditional spam filters by lacking typical spelling errors and using contextually accurate phrasing.',
+        action: 'Always cross-check unexpected requests through an independent communication channel.'
       },
       'cookie-theft': {
-        tag: "VECTOR 02 - INFOSTEALER MALWARE",
-        title: "Session Cookie Theft",
-        graphic: `
-          <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-            <rect x="20" y="20" width="130" height="80" rx="8" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5"/>
-            <rect x="30" y="30" width="110" height="15" fill="#F5F6F6" stroke="#0D0E0E" stroke-width="1.5"/>
-            <g class="svg-key-motion">
-              <circle cx="170" cy="60" r="14" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
-              <circle cx="166" cy="56" r="2" fill="#0D0E0E"/>
-              <circle cx="174" cy="62" r="2.5" fill="#0D0E0E"/>
-            </g>
-            <rect x="210" y="20" width="90" height="80" rx="8" fill="#0D0E0E"/>
-            <line x1="220" y1="40" x2="260" y2="40" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
-            <line x1="220" y1="55" x2="280" y2="55" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
-            <line x1="210" y1="20" x2="300" y2="20" stroke="#EF4444" stroke-width="2" class="svg-scan-beam"/>
-          </svg>`,
-        body: "Malware can harvest valid authentication cookies directly from web browser profiles. This allows an attacker to clone your session without triggering password or 2FA prompts.",
-        action: "Never save corporate passwords inside unencrypted web browser storage."
+        tag: 'TOKEN EXPLOIT',
+        title: 'Session Cookie Theft',
+        visual: '🍪🔑',
+        body: 'Infostealer malware targets session tokens saved in web browsers. Once stolen, attackers clone your active web session, enabling them to bypass traditional MFA prompts completely.',
+        action: 'Avoid storing company passwords in web browsers. Use corporate password vaults.'
       },
       'smishing': {
-        tag: "VECTOR 03 - MOBILE ATTACK",
-        title: "Smishing & SMS Alerts",
-        graphic: `
-          <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-            <rect x="120" y="10" width="80" height="100" rx="12" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-            <g class="animated-float">
-              <rect x="130" y="30" width="60" height="42" rx="6" fill="#FBC016" stroke="#0D0E0E" stroke-width="2"/>
-              <text x="138" y="52" font-weight="900" font-size="11" fill="#0D0E0E">URGENT</text>
-            </g>
-            <circle cx="160" cy="95" r="4" fill="#0D0E0E"/>
-            <path d="M75 60 C85 45 85 75 75 60" stroke="#EF4444" stroke-width="3" fill="none" class="svg-node-alert"/>
-            <path d="M245 60 C235 45 235 75 245 60" stroke="#EF4444" stroke-width="3" fill="none" class="svg-node-alert"/>
-          </svg>`,
-        body: "SMS phishing messages mimic legitimate two-factor authentication notices, urge immediate account verification, or spoof urgent HR payroll notices.",
-        action: "Do not tap links in SMS messages. Access company portals only via bookmarked internal URLs."
+        tag: 'MOBILE ATTACK',
+        title: 'Smishing & Mobile Scams',
+        visual: '📱⚠️',
+        body: 'Attackers send urgent text messages pretending to originate from IT, HR, or banking providers. They contain links pointing to credential harvester pages.',
+        action: 'Never open internal login links received via personal SMS or unknown phone numbers.'
       },
       'vishing': {
-        tag: "VECTOR 04 - VOICE CLONING",
-        title: "Voice Vishing Attacks",
-        graphic: `
-          <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-            <circle cx="160" cy="60" r="30" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="3"/>
-            <g stroke="#0D0E0E" stroke-width="5" stroke-linecap="round">
-              <line x1="120" y1="75" x2="120" y2="45" class="svg-wave-bar-1"/>
-              <line x1="140" y1="90" x2="140" y2="30" class="svg-wave-bar-2"/>
-              <line x1="160" y1="80" x2="160" y2="40" class="svg-wave-bar-3"/>
-              <line x1="180" y1="90" x2="180" y2="30" class="svg-wave-bar-4"/>
-              <line x1="200" y1="75" x2="200" y2="45" class="svg-wave-bar-1"/>
-            </g>
-          </svg>`,
-        body: "Cybercriminals leverage generative voice synthesis models to clone the voices of senior management or IT leads, making urgent telephone requests for sensitive network actions.",
-        action: "Hang up immediately and call back using verified internal directory extensions."
+        tag: 'AUDIO DEEPFAKE',
+        title: 'Executive Voice Cloning',
+        visual: '🎙️🎭',
+        body: 'By leveraging short audio samples from social media or interviews, bad actors synthesize executive voices to make unauthorized financial or credential transfer requests over phone calls.',
+        action: 'Follow formal approval protocols regardless of how convincing a voice call sounds.'
+      },
+      'ransomware': {
+        tag: 'MALWARE THREAT',
+        title: 'Ransomware & Extortion',
+        visual: '🔒💀',
+        body: 'Ransomware strains execute background encryption on system files and exfiltrate sensitive data before demanding ransom payments.',
+        action: 'Maintain offline backups and never execute untrusted email attachments.'
       },
       'supply-chain': {
-  tag: "VECTOR 05 - VENDOR COMPROMISE",
-  title: "Supply Chain Attacks",
-  graphic: `
-    <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-      <rect x="50" y="45" width="40" height="40" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5"/>
-      <!-- Added class="animated-float" to the compromised middle vendor box -->
-      <g class="animated-float">
-        <rect x="140" y="45" width="40" height="40" rx="6" fill="#FBC016" stroke="#0D0E0E" stroke-width="2.5"/>
-        <text x="156" y="70" fill="#0D0E0E" font-weight="900" font-size="16">!</text>
-      </g>
-      <rect x="230" y="45" width="40" height="40" rx="6" fill="#FFFFFF" stroke="#0D0E0E" stroke-width="2.5"/>
-      <line x1="90" y1="65" x2="140" y2="65" stroke="#0D0E0E" stroke-width="3" stroke-dasharray="4 4"/>
-      <line x1="180" y1="65" x2="230" y2="65" stroke="#0D0E0E" stroke-width="3" stroke-dasharray="4 4"/>
-    </svg>`,
-  body: "Attackers target third-party software vendors and plugin maintainers to inject malicious code into regular software updates, bypassing standard perimeter security tools.",
-  action: "Ensure all software updates are retrieved solely from official internal repository mirrors."
-},
-      'fido-keys': {
-        tag: "VECTOR 06 - DEFENSIVE HARDWARE",
-        title: "FIDO2 Hardware Keys",
-        graphic: `
-          <svg width="100%" height="100%" viewBox="0 0 320 120" fill="none">
-            <rect x="130" y="35" width="60" height="50" rx="8" fill="#0D0E0E" stroke="#FBC016" stroke-width="3"/>
-            <circle cx="160" cy="60" r="12" fill="#FBC016" class="animated-float"/>
-          </svg>`,
-        body: "Physical security keys (FIDO2/WebAuthn) bind authentication to the specific domain origin, making it technically impossible for a phishing site to intercept or replay your login credentials.",
-        action: "Register and carry your assigned hardware token for all critical infrastructure logins."
+        tag: 'VENDOR RISK',
+        title: 'Supply Chain Compromise',
+        visual: '🔗⚠️',
+        body: 'Attacks targeting trusted third-party software vendors leverage legitimate API keys and integrations to breach partner networks.',
+        action: 'Enforce principle of least privilege for all external vendor access.'
       }
     };
 
-    function openModal(threatKey) {
-      const data = modalData[threatKey];
+    function openModal(key) {
+      const data = threatDetails[key];
       if (!data) return;
-      document.getElementById('modalTag').innerText = data.tag;
-      document.getElementById('modalTitle').innerText = data.title;
-      document.getElementById('modalGraphic').innerHTML = data.graphic;
-      document.getElementById('modalBody').innerText = data.body;
-      document.getElementById('modalActionText').innerText = data.action;
+
+      document.getElementById('modalTag').textContent = data.tag;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalVisual').innerHTML = `<span style="font-size:4rem;">${data.visual}</span>`;
+      document.getElementById('modalBody').textContent = data.body;
+      document.getElementById('modalAction').innerHTML = `💡 <strong>Action Required:</strong> ${data.action}`;
+
       document.getElementById('modalOverlay').classList.add('active');
     }
 
@@ -1468,61 +1502,20 @@
       document.getElementById('modalOverlay').classList.remove('active');
     }
 
-    function closeModalOnOverlay(event) {
-      if (event.target === document.getElementById('modalOverlay')) {
-        closeModal();
-      }
+    function closeModalOnOverlay(e) {
+      if (e.target.id === 'modalOverlay') closeModal();
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-  const counters = document.querySelectorAll("#statsBanner .counter");
-
-  const animateCounter = (counter) => {
-    const target = +counter.getAttribute("data-target");
-    const prefix = counter.getAttribute("data-prefix") || "";
-    const suffix = counter.getAttribute("data-suffix") || "";
-    const duration = 1200; // Total animation speed (ms)
-    const startTime = performance.now();
-
-    const updateCount = (currentTime) => {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-
-      // Smooth cubic ease-out
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const currentCount = Math.floor(easeProgress * target);
-
-      counter.innerText = `${prefix}${currentCount}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(updateCount);
-      } else {
-        counter.innerText = `${prefix}${target}${suffix}`;
-      }
-    };
-
-    requestAnimationFrame(updateCount);
-  };
-
-  const observerOptions = {
-    threshold: 0.4 // Re-animates when 40% of the banner is visible
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-      } else {
-        // Reset when scrolled out of view so it repeats on scroll back
-        const prefix = entry.target.getAttribute("data-prefix") || "";
-        const suffix = entry.target.getAttribute("data-suffix") || "";
-        entry.target.innerText = `${prefix}0${suffix}`;
-      }
-    });
-  }, observerOptions);
-
-  counters.forEach((counter) => observer.observe(counter));
-});
+    let tickerIndex = 0;
+    const tickerItems = document.querySelectorAll('.ticker-item');
+    if (tickerItems.length > 0) {
+      setInterval(() => {
+        tickerItems[tickerIndex].classList.remove('active');
+        tickerIndex = (tickerIndex + 1) % tickerItems.length;
+        tickerItems[tickerIndex].classList.add('active');
+      }, 4000);
+    }
   </script>
 </body>
+
 </html>
